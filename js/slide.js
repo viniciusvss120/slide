@@ -5,6 +5,10 @@ export default class Slide {
     this.dist = {finalPosition: 0, startX: 0, movement: 0 }
   }
 
+  transiton(active) {
+    this.slide.style.transiton = active ? 'transform .3s' : '';
+  }
+
   moveSlide(distX) {
     this.dist.movePosition = distX
     this.slide.style.transform =`translate3d(${distX}px, 0, 0)`;
@@ -26,6 +30,7 @@ export default class Slide {
       movetype = 'touchmove';
     }
     this.wrapper.addEventListener(movetype, this.onMove);
+    this.transiton(false);
   }
 
   onMove(event) {
@@ -38,6 +43,18 @@ export default class Slide {
     const movetype = (event.type === 'mouseup') ? 'mousemove': 'touchmove'
     this.wrapper.removeEventListener(movetype, this.onMove)
     this.dist.finalPosition = this.dist.movePosition
+    this.transiton(true);
+    this.chengeSlideOnEnd();
+  }
+
+  chengeSlideOnEnd() {
+    if (this.dist.movement > 120 && this.index.next !== undefined) {
+      this.activePrevSlide()
+    } else if (this.dist.movement < -120 && this.index.prev !== undefined) {
+      this.activeNextSlide()
+    } else {
+      this.chengeSlide(this.index.active)
+    }
   }
 
   addSlideEvents() {
@@ -86,11 +103,24 @@ export default class Slide {
     console.log(this.index)
   }
 
+  activePrevSlide() {
+    if (this.index.next !== undefined) {
+      this.chengeSlide(this.index.next)
+    }
+  }
+
+  activeNextSlide() {
+    if (this.index.prev !== undefined) {
+      this.chengeSlide(this.index.prev)
+    }
+  }
+
   init(){
     this.slidesConfig();
+    this.transiton(true)
     this.bindEvents();
     this.addSlideEvents();
-    this.slidesConfig
+    this.slidesConfig();
     return this
   }
 }
