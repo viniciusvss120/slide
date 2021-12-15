@@ -109,7 +109,3 @@ img {
   background: #FB5 url('img/arrow.svg') center center no-repeat;
 
 }
-
-.arrow-nav button.prev {
-  transform: rotate(-180deg);
-}
