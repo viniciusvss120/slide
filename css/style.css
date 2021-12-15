@@ -1,8 +1,8 @@
-body{
+body {
   margin: 0px;
 }
 
-ul{
+ul {
   padding: 0px;
   margin: 0px;
   list-style: none;
@@ -48,9 +48,9 @@ img {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-} 
+}
 
-[data-control="slide"] li a{
+[data-control="slide"] li a {
   display: block;
   width: 12px;
   height: 12px;
@@ -61,6 +61,6 @@ img {
   margin: 5px;
 }
 
-[data-control="slide"] li a [data-control="slide"] li a:hover{
+[data-control="slide"] li.active a, [data-control="slide"] li a:hover {
   background: #E54;
 }
